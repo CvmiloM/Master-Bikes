@@ -79,4 +79,10 @@ def send_email(email):
 
 # Elimina o agrega la definición de enviar_correo si es necesario
 
+# mainapp/views.py
+
+from django.shortcuts import render
+
+def historial(request):
+    return render(request, 'mainapp/historial.html')
 

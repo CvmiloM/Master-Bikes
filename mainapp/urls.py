@@ -13,4 +13,5 @@ urlpatterns = [
     path('solicitud/<int:solicitud_id>/rechazar/', views.rechazar_solicitud, name='rechazar_solicitud'),
     # Elimina esta línea si no necesitas la funcionalidad enviar_correo
     # path('solicitud/<int:solicitud_id>/enviar-correo/', views.enviar_correo, name='enviar_correo'),
+    path('historial/', views.historial, name='historial'),
 ]
