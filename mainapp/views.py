@@ -1,8 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Solicitud, Cliente, HistorialReparacion
 from .forms import ConfirmarSolicitudForm, ClienteForm
+from django.conf import settings
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.mail import send_mail
 from django.conf import settings
+from .models import Cliente, Solicitud
 
 def home(request):
     return render(request, 'mainapp/home.html')
@@ -34,12 +37,6 @@ def detalle_solicitud(request, solicitud_id):
         form = ConfirmarSolicitudForm(instance=solicitud)
     return render(request, 'mainapp/detalle_solicitud.html', {'solicitud': solicitud, 'form': form})
 
-
-from django.shortcuts import render, redirect, get_object_or_404
-from django.core.mail import send_mail
-from django.conf import settings
-from .models import Cliente, Solicitud
-
 # Definición de otras vistas aquí
 
 def confirmar_solicitud(request, solicitud_id):
@@ -51,7 +48,7 @@ def confirmar_solicitud(request, solicitud_id):
             'Confirmación de reparación',
             f'Hola {solicitud.cliente.nombre},\n\nTu bicicleta puede ser reparada. Nos pondremos en contacto contigo pronto.',
             settings.EMAIL_HOST_USER,
-            [solicitud.cliente.email],
+            ['ca.monge@duocuc.cl'],
             fail_silently=False,
         )
         return redirect('solicitudes')
@@ -66,11 +63,19 @@ def rechazar_solicitud(request, solicitud_id):
             'Rechazo de reparación',
             f'Hola {solicitud.cliente.nombre},\n\nLamentamos informarte que tu bicicleta no puede ser reparada.',
             settings.EMAIL_HOST_USER,
-            [solicitud.cliente.email],
+            ['ca.monge@duocuc.cl'],
             fail_silently=False,
         )
         return redirect('solicitudes')
     return render(request, 'mainapp/rechazar_solicitud.html', {'solicitud': solicitud})
+
+#send_email
+
+def send_email(email):
+    send_mail(
+        'Confirmación de reparación'
+    )
+
 
 # Elimina o agrega la definición de enviar_correo si es necesario
 
