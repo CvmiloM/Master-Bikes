@@ -48,7 +48,7 @@ def confirmar_solicitud(request, solicitud_id):
             'Confirmación de reparación',
             f'Hola {solicitud.cliente.nombre},\n\nTu bicicleta puede ser reparada. Nos pondremos en contacto contigo pronto.',
             settings.EMAIL_HOST_USER,
-            ['tomas.leon.cisternas@gmail.com'],
+            ['ca.monge@duocuc.cl'],
             fail_silently=False,
         )
         return redirect('solicitudes')
